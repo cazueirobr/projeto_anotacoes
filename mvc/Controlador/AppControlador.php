@@ -3,10 +3,6 @@ namespace Controlador;
 use \Modelo\Conta;
 class AppControlador extends Controlador
 {
-    public function index()
-    {
-        $this->visao('inicial/index.php');
-    }
 
     public function registrar()
     {
@@ -22,4 +18,5 @@ class AppControlador extends Controlador
         $usuario->salvar();
         $this->redirecionar(URL_RAIZ);
     }
+
 }

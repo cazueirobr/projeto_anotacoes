@@ -8,6 +8,7 @@ class Conta extends Modelo
 {
     const BUSCAR_TODOS = 'SELECT * FROM usuarios ORDER BY usuario';
     const BUSCAR_ID = 'SELECT * FROM usuarios WHERE id_usuario = ?';
+    const BUSCAR_EMAIL = 'SELECT * FROM usuarios WHERE email = ?';
     const INSERIR = 'INSERT INTO usuarios(usuario, email, senha) VALUES (?, ?, ?)';
     const ATUALIZAR = 'UPDATE usuarios SET usuario = ?, email = ?, senha = ? WHERE id_usuario = ?';
     const DELETAR = 'DELETE FROM usuarios WHERE id_usuario = ?';
@@ -15,18 +16,19 @@ class Conta extends Modelo
     private $nome;
     private $email;
     private $senha;
+    private $senhaPlana;
 
 
     public function __construct(
         $nome = null,
         $email = null,
-        $senha = null,
+        $senhaPlana = null,
         $id = null
     ) {
         $this->id = $id;
         $this->nome = $nome;
         $this->email = $email;
-        $this->senha = $senha;
+        $this->senha = password_hash($senhaPlana, PASSWORD_BCRYPT);
     }
 
     public function getId()
@@ -72,6 +74,45 @@ class Conta extends Modelo
             $this->atualizar();
         }
     }
+
+    public function verificarSenha($senhaPlana)
+    {
+        return password_verify($senhaPlana, $this->senha);
+    }
+
+    public static function buscarEmail($email)
+    {
+        $comando = DW3BancoDeDados::prepare(self::BUSCAR_EMAIL);
+        $comando->bindValue(1, $email, PDO::PARAM_STR);
+        $comando->execute();
+        $registro = $comando->fetch();
+        $usuario = null;
+        if ($registro) {
+            $usuario = new Conta(
+                $registro['usuario'],
+                $registro['email'],
+                null,
+                $registro['id_usuario']
+            );
+            $usuario->senha = $registro['senha'];
+        }
+        return $usuario;
+    }
+
+    public static function buscarId($id)
+    {
+        $comando = DW3BancoDeDados::prepare(self::BUSCAR_ID);
+        $comando->bindValue(1, $id, PDO::PARAM_INT);
+        $comando->execute();
+        $registro = $comando->fetch();
+        return new Conta(
+            $registro['usuario'],
+                $registro['email'],
+                null,
+                $registro['id_usuario']
+        );
+    }
+
 
     public function inserir()
     {

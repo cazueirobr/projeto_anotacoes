@@ -22,7 +22,7 @@
     <div class="container-fluid">
     <div class="row justify-content-start p-4">
         <div class="col-1">
-       <h5><i class="fa-solid fa-person-walking-arrow-loop-left">Voltar</i></h5>
+        <h5><a href="<?= URL_RAIZ?>"><i class="fa-solid fa-person-walking-arrow-loop-left">Voltar</i></a></h5>
         </div>
       </div>
     </div>
