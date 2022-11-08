@@ -9,6 +9,7 @@ class Nota extends Modelo
 {
     const BUSCAR_TODOS = 'SELECT id_anotacao, titulo, mensagem FROM anotacoes ORDER BY titulo';
     const PESQUISAR = "SELECT id_anotacao, titulo, mensagem FROM `anotacoes` WHERE titulo LIKE ?";
+    const MINHAS_ANOTACOES = "SELECT id_anotacao, titulo, mensagem FROM anotacoes WHERE id_usuario = ?";
 
     private $titulo;
     private $texto;
@@ -56,6 +57,19 @@ class Nota extends Modelo
  
         return $objetos;
         
+    }
+
+    public static function minhasAnotacoes($id)
+    {
+        $registros = DW3BancoDeDados::prepare(self::MINHAS_ANOTACOES);
+        $registros->bindValue(1, $id, PDO::PARAM_STR);
+        $registros->execute();
+        $objetos = [];
+        foreach($registros as $registro){
+            $objetos[] = new Nota($registro['titulo'],$registro['mensagem'],$registro['id_anotacao']);
+        }
+ 
+        return $objetos;
     }
 
 

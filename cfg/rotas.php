@@ -27,4 +27,9 @@ $rotas = [
     '/notes/criar' => [
         'GET' => '\Controlador\Notes#criar',
     ],
+
+    '/notes/minhas' => [
+        'GET' => '\Controlador\Notes#minhasAnotacoes',
+    ],
+
 ];

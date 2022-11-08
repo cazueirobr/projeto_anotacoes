@@ -12,17 +12,10 @@ class Notes extends Controlador
 
     public function indexLogado(){
         $this->verificarLogado();
-        $teste = $this->verificarLogado();
-        var_dump($teste);
-        exit;
         $mensagens = Nota::buscarTodos();
         $this->visao('inicial/usuarioLogado.php',['mensagens' => $mensagens]);
     }
 
-    public function registrar()
-    {
-        $this->visao('inicial/registrar.php');
-    }
 
     public function pesquisar()
     {
@@ -32,6 +25,12 @@ class Notes extends Controlador
 
     public function logadoSistema(){
         $this->visao('inicial/usuarioLogado.php');
+    }
+
+    public function minhasAnotacoes(){
+        $this->verificarLogado();
+        $mensagens = Nota::minhasAnotacoes(DW3Sessao::get('usuario'));
+        $this->visao('inicial/minhasAnotacoes.php',['mensagens' => $mensagens]);
     }
 
 }
