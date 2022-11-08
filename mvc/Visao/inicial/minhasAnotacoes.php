@@ -32,13 +32,13 @@
       </nav>
       <ul class="nav nav-tabs">
   <li class="nav-item">
-    <a class="nav-link active" href="#">Todos</a>
+  <a class="nav-link" href="<?= URL_RAIZ . 'notes'?>">Todos</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">Minhas anotações</a>
+    <a class="nav-link active" href="<?= URL_RAIZ . 'notes/minhas'?>">Minhas anotações</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">Criar <i class="fa-solid fa-plus"></i></a>
+    <a class="nav-link" href="<?= URL_RAIZ . 'notes/criar' ?>">Criar <i class="fa-solid fa-plus"></i></a>
   </li>
   </ul>
     </div>
@@ -49,7 +49,7 @@
 
 	<div class="col pb-4">
         <div class="card p-3" style="width: 18rem;">
-        <h5 class="card-header"><i class="fa-solid fa-pen-to-square"></i> : <i class="fa-solid fa-trash"></i></h5>
+        <h5 class="card-header"><a href="<?= URL_RAIZ . 'notes/' . $mensagem->getId()?>"><i class="fa-solid fa-pen-to-square"></i></a> : <i class="fa-solid fa-trash"></i></h5>
             <div class="card-body">
               <h5 class="card-title"><?php echo $mensagem->getTitulo() ?></h5>
               <p class="card-text"><?= $mensagem->getTexto() ?></p>

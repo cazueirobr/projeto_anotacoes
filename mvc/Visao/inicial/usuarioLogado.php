@@ -32,13 +32,13 @@
       </nav>
       <ul class="nav nav-tabs">
   <li class="nav-item">
-    <a class="nav-link active" href="#">Todos</a>
+    <a class="nav-link active" href="<?= URL_RAIZ . 'notes'?>">Todos</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="<?= URL_RAIZ . 'notes/minhas'?>">Minhas anotações</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">Criar <i class="fa-solid fa-plus"></i></a>
+    <a class="nav-link" href="<?= URL_RAIZ . 'notes/criar' ?>">Criar <i class="fa-solid fa-plus"></i></a>
   </li>
   </ul>
     </div>

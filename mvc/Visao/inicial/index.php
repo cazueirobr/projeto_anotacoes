@@ -30,7 +30,6 @@
     </div>
   <div class="row">
   <?php 
-  $contador = 0;
   foreach ($mensagens as $mensagem) : ?>
 
 	<div class="col pb-4">

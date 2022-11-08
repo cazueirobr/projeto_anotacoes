@@ -22,10 +22,12 @@ $rotas = [
         'POST' => '\Controlador\Notes#armazenar',
     ],
     '/notes/?' => [
+        'GET' => '\Controlador\Notes#mostrar',
         'PATCH' => '\Controlador\Notes#atualizar',
     ],
     '/notes/criar' => [
         'GET' => '\Controlador\Notes#criar',
+        'POST' => '\Controlador\Notes#armazenarAnotacoes',
     ],
 
     '/notes/minhas' => [
