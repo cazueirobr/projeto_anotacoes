@@ -6,7 +6,7 @@
 <div class="col">
       <ul class="nav p-3 justify-content-end">
         <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><?= $dados ?></a>
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><?= $perfil->getNome() ?></a>
     <div class="dropdown-menu">
       <a class="dropdown-item" href="#">Editar conta</a>
       <div class="dropdown-divider"></div>
@@ -30,19 +30,24 @@
     </div>
     <div class="container pt-5">
        
-        <form action="<?php URL_RAIZ . 'notes/' . $anotacao->getId()?>" method='post'>
+    <form action="<?php URL_RAIZ . 'notes/perfil'?>" method='post'>
             <input type="hidden" name="_metodo" value="PATCH">
             <div class="row align-items-center justify-content-center vh-100">
             <div class="col">
             <div class="form-group">
-                 <label for="exampleInputEmail1">Titulo</label>
-                 <input type="text" class="form-control" id="Nome" name="titulo" value="<?= $anotacao->getTitulo()?>">
+                 <label for="exampleInputEmail1">Nome</label>
+                 <input type="text" class="form-control" id="Nome" name="nome" value="<?= $perfil->getNome()?>">
+                 <label for="exampleInputEmail1">E-mail</label>
+                 <input type="text" class="form-control" id="Nome" name="email" value="<?= $perfil->getEmail()?>">
+                 <label for="exampleInputEmail1">Nova senha</label>
+                 <input type="text" class="form-control" id="Nome" name="senha1">
+                 <label for="exampleInputEmail1">Confirmar senha</label>
+                 <input type="text" class="form-control" id="Nome" name="senha2">
+                 
                   </div>
-                  <div class="form-group">
-    <label for="exampleFormControlTextarea1">Mensagem</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" name="texto" rows="10"><?= $anotacao->getTexto()?></textarea>
-  </div>
-            <button type="submit" class="btn btn-primary">Enviar</button>
+                  <button type="submit" class="btn btn-primary">Enviar</button>
+                  </div>
+            
         </div>
     </div>
           </form>

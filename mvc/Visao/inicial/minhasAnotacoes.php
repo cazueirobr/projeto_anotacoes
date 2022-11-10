@@ -9,7 +9,7 @@
         <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><?= $dados ?></a>
     <div class="dropdown-menu">
-      <a class="dropdown-item" href="#">Editar conta</a>
+      <a class="dropdown-item" href="<?= URL_RAIZ . 'notes/perfil' ?>">Editar conta</a>
       <div class="dropdown-divider"></div>
       <a class="dropdown-item" href="#" onclick="$('#logout').submit()">Sair</a>
       <form id="logout" action="<?= URL_RAIZ . 'logar' ?>" method="post" class="hidden">

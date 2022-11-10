@@ -24,6 +24,7 @@ $rotas = [
     '/notes/?' => [
         'GET' => '\Controlador\Notes#mostrar',
         'PATCH' => '\Controlador\Notes#atualizar',
+        'DELETE' => '\Controlador\Notes#deletar'
     ],
     '/notes/criar' => [
         'GET' => '\Controlador\Notes#criar',
@@ -33,5 +34,10 @@ $rotas = [
     '/notes/minhas' => [
         'GET' => '\Controlador\Notes#minhasAnotacoes',
     ],
+
+    '/notes/perfil' => [
+        'GET' => '\Controlador\PerfilControlador#index',
+        'PATCH' => '\Controlador\PerfilControlador#atualizar'
+    ]
 
 ];

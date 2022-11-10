@@ -67,6 +67,7 @@ class Notes extends Controlador
     {
         $contato = Nota::buscarId($id);
         $contato->setTitulo($_POST['titulo']);
+        $contato->setTexto($_POST['texto']);
         $contato->salvar();
         $this->redirecionar(URL_RAIZ . 'notes/minhas');
     }

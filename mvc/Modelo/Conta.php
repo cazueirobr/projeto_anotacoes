@@ -10,7 +10,8 @@ class Conta extends Modelo
     const BUSCAR_ID = 'SELECT * FROM usuarios WHERE id_usuario = ?';
     const BUSCAR_EMAIL = 'SELECT * FROM usuarios WHERE email = ?';
     const INSERIR = 'INSERT INTO usuarios(usuario, email, senha) VALUES (?, ?, ?)';
-    const ATUALIZAR = 'UPDATE usuarios SET usuario = ?, email = ?, senha = ? WHERE id_usuario = ?';
+    const ATUALIZAR_SENHA = 'UPDATE usuarios SET usuario = ?, email = ?, senha = ? WHERE id_usuario = ?';
+    const ATUALIZAR = 'UPDATE usuarios SET usuario = ?, email = ? WHERE id_usuario = ?';
     const DELETAR = 'DELETE FROM usuarios WHERE id_usuario = ?';
     private $id;
     private $nome;
@@ -28,7 +29,7 @@ class Conta extends Modelo
         $this->id = $id;
         $this->nome = $nome;
         $this->email = $email;
-        $this->senha = password_hash($senhaPlana, PASSWORD_BCRYPT);
+        $this->senha = $senhaPlana;
     }
 
     public function getId()
@@ -116,6 +117,7 @@ class Conta extends Modelo
 
     public function inserir()
     {
+        password_hash($senhaPlana, PASSWORD_BCRYPT);
         DW3BancoDeDados::getPdo()->beginTransaction();
         $comando = DW3BancoDeDados::prepare(self::INSERIR);
         $comando->bindValue(1, $this->nome, PDO::PARAM_STR);
@@ -132,8 +134,17 @@ class Conta extends Modelo
         $comando = DW3BancoDeDados::prepare(self::ATUALIZAR);
         $comando->bindValue(1, $this->nome, PDO::PARAM_STR);
         $comando->bindValue(2, $this->email, PDO::PARAM_STR);
+        $comando->bindValue(3, $this->id, PDO::PARAM_INT);
+        $comando->execute();
+    }
+
+    public function atualizarComSenha()
+    {
+        $comando = DW3BancoDeDados::prepare(self::ATUALIZAR_SENHA);
+        $comando->bindValue(1, $this->nome, PDO::PARAM_STR);
+        $comando->bindValue(2, $this->email, PDO::PARAM_STR);
         $comando->bindValue(3, $this->senha, PDO::PARAM_STR);
-        $comando->bindValue(6, $this->id, PDO::PARAM_INT);
+        $comando->bindValue(4, $this->id, PDO::PARAM_INT);
         $comando->execute();
     }
 

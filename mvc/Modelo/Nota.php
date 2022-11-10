@@ -12,7 +12,7 @@ class Nota extends Modelo
     const MINHAS_ANOTACOES = "SELECT * FROM anotacoes WHERE id_usuario = ?";
     const INSERIR = "INSERT INTO anotacoes(titulo, mensagem, id_usuario) VALUES (?, ?, ?)";
     const BUSCAR_ID = "SELECT * FROM anotacoes WHERE id_anotacao = ?";
-    const ATUALIZAR = "UPDATE anotacoes SET titulo = ? WHERE id_anotacao = ?";
+    const ATUALIZAR = "UPDATE anotacoes SET titulo = ?, mensagem = ? WHERE id_anotacao = ?";
 
     private $titulo;
     private $texto;
@@ -45,6 +45,11 @@ class Nota extends Modelo
     public function setTitulo($titulo)
     {
         $this->titulo = $titulo;
+    }
+
+    public function setTexto($texto)
+    {
+        $this->texto = $texto;
     }
 
     public static function buscarTodos()
@@ -126,7 +131,8 @@ class Nota extends Modelo
     {
         $comando = DW3BancoDeDados::prepare(self::ATUALIZAR);
         $comando->bindValue(1, $this->titulo, PDO::PARAM_STR);
-        $comando->bindValue(2, $this->id, PDO::PARAM_INT);
+        $comando->bindValue(2, $this->texto, PDO::PARAM_STR);
+        $comando->bindValue(3, $this->id, PDO::PARAM_INT);
         $comando->execute();
     }
 
