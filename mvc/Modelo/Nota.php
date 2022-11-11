@@ -8,7 +8,7 @@ use \Framework\DW3BancoDeDados;
 class Nota extends Modelo
 {
     const BUSCAR_TODOS = 'SELECT id_anotacao, titulo, mensagem FROM anotacoes ORDER BY titulo';
-    const PESQUISAR = "SELECT * FROM anotacoes WHERE titulo = ?";
+    const PESQUISAR = "SELECT * FROM anotacoes WHERE titulo LIKE ?";
     const MINHAS_ANOTACOES = "SELECT * FROM anotacoes WHERE id_usuario = ?";
     const INSERIR = "INSERT INTO anotacoes(titulo, mensagem, id_usuario) VALUES (?, ?, ?)";
     const BUSCAR_ID = "SELECT * FROM anotacoes WHERE id_anotacao = ?";
@@ -79,10 +79,9 @@ class Nota extends Modelo
 
     public static function pesquisar($pesquisa){
         $comando = DW3BancoDeDados::prepare(self::PESQUISAR);
-        $comando->bindValue(1, $pesquisa, PDO::PARAM_STR);
+        $comando->bindValue(1, '%'.$pesquisa.'%', PDO::PARAM_STR);
         $comando->execute();
-        $registros = $comando->fetch();
-        var_dump($registros);
+        $registros = $comando->fetchAll();
         $objetos = [];
         foreach($registros as $registro){
             $objetos[] = new Nota($registro['titulo'],$registro['mensagem'],$registro['id_usuario'],$registro['id_anotacao']);
